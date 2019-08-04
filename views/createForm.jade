@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    h1= title
+    form(method="post", encType="multipart/form-data")
+        div.form-group
+            input(type="text", name="firstname", placeholder="Firstname")
+        div.form-group
+            input(type="text", name="lastname", placeholder="Lastname")
+        div.form-group
+            input(type="text", name="username", placeholder="Username")
+        div.form-group
+            input(type="text", name="email", placeholder="email")
+        div.form-group
+            input(type="password", name="password", placeholder="password")
+        div.form-group
+            input(type="text", name="phone", placeholder="phone")
+        div.form-group
+            input(type="file", name="profilepicture", placeholder="profilepicture")
+        div.form-group
+            input(type="submit", value="Create")
