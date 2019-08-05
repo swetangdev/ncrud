@@ -4,8 +4,10 @@ block content
     h1= title
     form(method="post")
         div.form-group
-            input(name="username", class="form-control", placeholder="Username", type="text")
+            label Username : 
+            input(name="username", class="form-control", placeholder="Username", type="text", class="form-control")
         div.form-group
-            input(name="password", class="form-control", placeholder="Password", type="password")
+            label Password : 
+            input(name="password", class="form-control", placeholder="Password", type="password", class="form-control")
         div.form-group
-            input(type="submit", value="Log in")
+            input(type="submit", value="Log in", class="form-control")
