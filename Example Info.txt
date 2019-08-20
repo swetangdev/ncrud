@@ -43,3 +43,30 @@ Login : http://localhost:3000/login
 after login it will generate jwt-token to send request using Postman to get homepage with logged user details.
 
 Homepage : http://localhost:3000/home
+
+
+
+
+------------- Points to improve
+
+
+1) change in method flow of export as per discussion
+
+2) try to use exception handling
+
+3) try to reduce dependency from app.js(make it in more specific module)
+
+4) Routing file should be made common and split them in sub routing
+
+5) try to make constants file for config, constant variables and messages
+
+
+if unauth on home then redirect back to login
+
+when login pass complete user object except pwd instead user._id
+//make common db query file 
+file upload use in user specific module
+
+toast
+excel/pdf upload, read, write
+node mailer
