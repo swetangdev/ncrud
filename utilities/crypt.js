@@ -12,7 +12,6 @@ var crypt = function () {
 
     this.encrypt = function (text) {
         const cipher = crypto.createCipheriv(algorithm, key, iv);
-
         let encrypted = cipher.update(text, 'utf8', 'hex');
         encrypted += cipher.final('hex');
         return encrypted;
@@ -20,7 +19,6 @@ var crypt = function () {
 
     this.decrypt = function (encrypted) {
         const decipher = crypto.createDecipheriv(algorithm, key, iv);
-
         let decrypted = decipher.update(encrypted, 'hex', 'utf8');
         decrypted += decipher.final('utf8');
         return decrypted;

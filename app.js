@@ -6,11 +6,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var mongoStore = require('connect-mongo')(session);
-var indexRouter = require('./routes/index');
-var homeRouter = require('./routes/home');
-var authRouter = require('./routes/auth');
-var usersRouter = require('./routes/users');
-var logoutRouter = require('./routes/logout');
+var routing = require('./routing/routing');
 var db = require('./db');
 var app = express();
 
@@ -32,11 +28,7 @@ app.use(session({
     mongooseConnection: db
   })
 }));
-app.use('/', indexRouter);
-app.use('/login', authRouter);
-app.use('/home', homeRouter);
-app.use('/users', usersRouter);
-app.use('/logout', logoutRouter);
+app.use('/', routing);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

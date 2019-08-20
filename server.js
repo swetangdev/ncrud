@@ -1,7 +1,7 @@
 const http = require('http');
-const db = require('./db');
 const app = require('./app');
+const config = require('./config');
+const constant = require('./utilities/constants/constant');
 
-const server = http.createServer(app).listen(3000, function() {
-    console.log('Listening 3000');
-})
+const server = http.createServer(app).on('error', err => console.log(err));
+server.listen(config.serverPort, function () { console.log(constant.server.serverListen + config.serverPort); });

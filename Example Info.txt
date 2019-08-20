@@ -1,0 +1,45 @@
+npm install // to install dependancies
+node server.js // to run application
+
+Database -> it will create "Admin" db in local mongodb with "users" table
+
+
+---------------------------------------------------------------
+::: Usage ::: 
+---------------------------------------------------------------
+
+-- data.json file contains list of users json for create.
+
+USING POSTMAN API - CRUD with password encode/decode, File Upload(image stored in local folder - public/userphotos)
+
+Users : http://localhost:3000/users or http://localhost:3000/users/all
+Create : http://localhost:3000/users/create // also we can run using browser to upload Profile Photo 
+Update : http://localhost:3000/users/update/{id}
+delete : http://localhost:3000/users/delete/{id}
+search : http://localhost:3000/users/delete/{search key} // using firstname and lastname
+pagination : http://localhost:3000/users/all/0/5
+
+
+
+CREATE/UPDATE :::
+
+{
+"firstname":"test",
+"lastname":"user",
+"username":"testuser",
+"email":"testuser@gmail.com",
+"phone":"123123",
+"password":"jaan",
+"profilephoto":""
+}
+
+- Create also work using browser (for upload profile photo).
+
+
+---- Login and homepage ----
+
+Login : http://localhost:3000/login
+
+after login it will generate jwt-token to send request using Postman to get homepage with logged user details.
+
+Homepage : http://localhost:3000/home
