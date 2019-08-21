@@ -29,7 +29,7 @@ CREATE/UPDATE :::
 "username":"testuser",
 "email":"testuser@gmail.com",
 "phone":"123123",
-"password":"jaan",
+"password":"test",
 "profilephoto":""
 }
 
@@ -43,6 +43,7 @@ Login : http://localhost:3000/login
 after login it will generate jwt-token to send request using Postman to get homepage with logged user details.
 
 Homepage : http://localhost:3000/home
+
 
 
 
@@ -65,7 +66,9 @@ if unauth on home then redirect back to login
 
 when login pass complete user object except pwd instead user._id
 //make common db query file 
-file upload use in user specific module
+file upload use in user specific module *********************
+user active field
+
 
 toast
 excel/pdf upload, read, write

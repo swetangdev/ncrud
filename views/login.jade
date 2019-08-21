@@ -1,7 +1,7 @@
 extends layout
 
 block content
-    h1= title
+    h1.title= title
     form(method="post")
         div.form-group
             label Email : 
@@ -9,5 +9,5 @@ block content
         div.form-group
             label Password : 
             input(name="password", class="form-control", placeholder="Password", type="password", class="form-control")
-        div.form-group
+        div.form-group.btn
             input(type="submit", value="Log in", class="form-control")

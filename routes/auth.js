@@ -16,13 +16,16 @@ router.post('/', function (req, res, next) {
     } else {
         usersSchema.findOne({ email: req.body.username }).exec(function (err, user) {
             if (err) {
-                return next(err);
+                return res.status(403).json({ message: message.common.wentWrong });
             } else if (!user) {
                 return res.status(401).json({ message: message.user.userNotRegistered });
             } else {
 
-                if (req.body.password === crypt().decrypt(user.password)) {
-                    var token = jwt.sign({ id: user._id }, config.secret, {
+                if (!user.isActive) {
+                    res.status(200).send({ auth: false, message: message.user.userInactive });
+                } else if (req.body.password === crypt().decrypt(user.password)) {
+                    user.password = 0;
+                    var token = jwt.sign({ user }, config.secret, {
                         expiresIn: config.tokenExpireTime
                     });
 

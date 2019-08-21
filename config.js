@@ -1,4 +1,5 @@
 module.exports = {
+    sessionSecret: 'any random key',
     secret: 'topsecret',
     tokenExpireTime: 240,
     serverPort: 3000,

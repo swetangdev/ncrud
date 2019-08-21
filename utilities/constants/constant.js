@@ -2,6 +2,7 @@
 const constants = {
     common: {
         notFound: 'Sorry nothing found.',
+        wentWrong: 'Something went wrong.',
     },
     server: {
         serverListen: 'Listening to ',
@@ -18,9 +19,11 @@ const constants = {
         updated: 'User updated',
         createErr: 'Error while creating user.',
         fetchError: 'Unable to fetch users!!!',
-        filestatus: ' - File uploaded!',
+        filestatus: ' - Profile picture uploaded!',
+        fileUploaded: ' - No profile picture uploaded.',
         userPassEmpty: 'Username or password not valid or empty.',
         userNotRegistered: 'Sorry username is not registered!!!',
+        userInactive: 'Your account is disabled, please contact administrator.',
         passwordIncorrect: 'Password is incorrect',
         alreadyRegistered: 'User already registered with this email, try with another email.',
     },

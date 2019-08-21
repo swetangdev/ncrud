@@ -8,9 +8,10 @@ var postSchema = new Schema({
     password: String,
     email: String,
     phone: String,
-    profilepicture:String
+    profilepicture: String,
+    isActive: { type: Boolean, default: 0 }
 }, {
-    timestamps: true
-});
+        timestamps: true
+    });
 
 module.exports = mongoose.model('users', postSchema);

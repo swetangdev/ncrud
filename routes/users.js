@@ -7,7 +7,6 @@ users.get('/', function (req, res, next) {
   res.redirect('/users/all');
 });
 users.get('/all/:page?/:limit?', function (req, res, next) {
-  // userManip.list(req, res, next);
   userManip().list(req, res, next);
 });
 users.get('/create', function (req, res, next) {

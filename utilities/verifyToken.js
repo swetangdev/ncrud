@@ -13,7 +13,8 @@ function verifyToken(req, res, next) {
         if (err) {
             return res.status(500).send({ auth: false, message: message.token.authFail });
         }
-        req.userId = decoded.id;
+
+        req.userId = decoded.user._id;
         next();
     });
 }

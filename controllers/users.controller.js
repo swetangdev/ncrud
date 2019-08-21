@@ -1,18 +1,17 @@
-
 var userHandle = function () {
     var usersSchema = require('../models/users.js');
     var crypt = require('../utilities/crypt');
     const userConstant = require('../utilities/constants/constant');
 
     this.create = (req, res, next) => {
-        var filestatus = '';
+        var filestatus = userConstant.user.fileUploaded;
 
         if (!req.body.username || !req.body.password) {
             res.status(200).json({ message: userConstant.user.userOrPasswordRequired });
         } else {
             usersSchema.findOne({ email: req.body.email }).exec(function (err, user) {
                 if (err) {
-                    return next(err);
+                    return res.status(403).send({ message: userConstant.common.wentWrong });
                 } else if (user) {
                     return res.status(200).json({ message: userConstant.user.alreadyRegistered });
                 }
@@ -30,12 +29,13 @@ var userHandle = function () {
                 filestatus = userConstant.user.filestatus;
             });
         }
+        req.body.isActive = true;
         req.body.password = crypt().encrypt(req.body.password);
         var userObj = new usersSchema(req.body);
         userObj.save().then(user => {
             res.status(200).json({ message: userConstant.user.created + filestatus })
         }).catch(err => {
-            res.status(400).send({ 'Error while creating user.': err });
+            res.status(403).send({ message: userConstant.user.createErr });
         });
     };
 
@@ -49,9 +49,11 @@ var userHandle = function () {
         }
         usersSchema.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, user) => {
             if (err) {
-                return res.status(400).json({ message: userConstant.user.notFound });
-            } else {
+                return res.status(403).json({ message: userConstant.common.wentWrong });
+            } else if (user) {
                 res.status(200).json(userConstant.user.updated);
+            } else {
+                return res.status(403).json({ message: userConstant.user.notFound });
             }
         })
     };
@@ -59,9 +61,11 @@ var userHandle = function () {
     this.delete = function (req, res, next) {
         usersSchema.findByIdAndRemove(req.params.id, (err, user) => {
             if (err) {
-                return res.status(400).json({ message: userConstant.user.notFound });
-            } else {
+                return res.status(403).json({ message: userConstant.common.wentWrong });
+            } else if (user) {
                 res.status(200).json(userConstant.user.deleted);
+            } else {
+                return res.status(403).json({ message: userConstant.user.notFound });
             }
         })
     };
@@ -69,15 +73,15 @@ var userHandle = function () {
     this.list = function (req, res, next) {
         var perPage = parseInt(req.params.limit);
         var page = Math.max(0, req.params.page);
-        usersSchema.find((err, users) => {
+        usersSchema.find({}, { password: 0 }, (err, users) => {
             if (err) {
-                return res.status(400).send({ message: userConstant.user.fetchError, err: err });
+                return res.status(403).send({ message: userConstant.common.wentWrong });
             } else {
                 if (!users.length) {
                     return res.status(200).send({ message: userConstant.common.notFound });
                 }
 
-                res.status(200).send(users);
+                res.status(200).send('<pre>' + users + '</pre>');
             }
         }).skip(perPage * page).limit(perPage).sort({
             username: 'asc'
@@ -85,16 +89,16 @@ var userHandle = function () {
     };
 
     this.search = function (req, res, next) {
-        usersSchema.find({ $or: [{ firstname: { $regex: '.*' + req.params.s + '.*' } }, { lastname: { $regex: '.*' + req.params.s + '.*' } }] }, (err, users) => {
+        usersSchema.find({ $or: [{ firstname: { $regex: '.*' + req.params.s + '.*' } }, { lastname: { $regex: '.*' + req.params.s + '.*' } }] }, { password: 0 }, (err, users) => {
             if (err) {
-                return res.status(400).json({ message: userConstant.user.fetchError });
+                return res.status(403).json({ message: userConstant.common.wentWrong });
             } else {
                 if (!users.length) {
                     return res.status(200).send({ message: userConstant.common.notFound });
                 }
-                res.status(200).send(users);
+                res.status(200).send('<pre>' + users + '</pre>');
             }
-        }).catch(err => console.log('Caught: ', err.message));
+        });
 
     }
 };
