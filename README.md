@@ -1,4 +1,10 @@
 "Ncrud" 
 <br/>
-git config --local user.name "DevGeek" <br/>
-git config --local user.email "iamdevgeek@gmail.com"
+User CRUD operations
+<br/>
+Login and authentication on Homepage
+<br/>
+<br/>
+jwt/fileupload/routing
+<br/>
+<br/>
